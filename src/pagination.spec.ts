@@ -6,7 +6,7 @@ import {
 
 describe("pagination", () => {
   it("returns empty array of values, and control with 1 item", () => {
-    const conf: PaginationConfiguration = {
+    const conf: PaginationConfiguration<number>= {
       maxValues: 3,
       values: [],
       pageSize: 1,
@@ -18,7 +18,7 @@ describe("pagination", () => {
     expect(result.pagination[0].offsetPage).toBe(null);
   });
   it("returns empty array of values, and control with 1 item", () => {
-    const conf: PaginationConfiguration = {
+    const conf: PaginationConfiguration<number> = {
       maxValues: 3,
       values: [ 1, 2 ],
       pageSize: 1,

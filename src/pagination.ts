@@ -1,7 +1,7 @@
-export interface PaginationConfiguration {
+export interface PaginationConfiguration<T> {
   pageSize: number;
   maxValues: number;
-  values: number[];
+  values: T[];
 }
 
 export interface PaginationItem {
@@ -15,7 +15,7 @@ export interface PaginationResult {
 }
 
 export function paginationControls(
-  config: PaginationConfiguration,
+  config: PaginationConfiguration<number>,
   offsetPage: number
 ): PaginationResult {
   const result: PaginationResult = {
