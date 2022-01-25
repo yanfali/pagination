@@ -6,7 +6,7 @@ export interface PaginationConfiguration<T> {
 
 export interface PaginationItem {
   label: string;
-  offsetPage: number | null;
+  offsetPage: number | undefined
 }
 
 export interface PaginationResult {
@@ -24,14 +24,14 @@ export function paginationControls(
   };
 
   if (config.values.length === 0) {
-    result.pagination.push({ label: "1", offsetPage: null });
+    result.pagination.push({ label: "1", offsetPage: undefined });
   } else {
-    let totalPages = Math.floor(config.values.length / config.pageSize);
+    const totalPages = Math.floor(config.values.length / config.pageSize);
     const offsetPage = 0;
     for (let i = offsetPage; i < totalPages && i < config.maxValues; i++) {
       result.pagination.push({
         label: `${i + 1}`,
-        offsetPage: i === offsetPage ? null : i,
+        offsetPage: i === offsetPage ? undefined : i,
       });
     }
     if (result.pagination.length > 1) {
