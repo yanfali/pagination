@@ -32,7 +32,7 @@ export function paginationControls(
       result.pagination.push({
         label: `${i + 1}`,
         offsetPage: i === offsetPage ? null : i,
-      } as PaginationItem);
+      });
     }
     if (result.pagination.length > 1) {
       result.pagination.push({
