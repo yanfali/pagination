@@ -90,12 +90,12 @@ list: [ 1 ]
 pagination: Previous 1 <2> 3 Next
 list: [ 2 ]
 
-5. page size = 1, max values = 3, array [ 1, 2, 3, 4 ], offsetPage = 2
+6. page size = 1, max values = 3, array [ 1, 2, 3, 4 ], offsetPage = 2
 
 pagination: Previous 2 <3> 4 
 list: [ 3 ]
 
-5. page size = 1, max values = 3, array [ 1, 2, 3, 4 ], offsetPage = 2
+7. page size = 1, max values = 3, array [ 1, 2, 3, 4 ], offsetPage = 2
 
 pagination: Previous 2 <3> 4 
 list: [ 3 ]
@@ -109,3 +109,8 @@ executing previous again should return:
 
 pagination: <1> 2 3 Next
 list: [ 1 ]
+
+8. page size = 2, max values = 3, array [ 1, 2, 3, 4, 5, 6, 7 ], offsetPage = 0
+
+ pagination: <1> 2 3 Next
+ list: [ 1, 2 ]

@@ -27,7 +27,7 @@ export function paginationControls(
   if (config.values.length === 0) {
     result.pagination.push({ label: "1", offsetPage: undefined });
   } else {
-    const totalPages = Math.floor(config.values.length / config.pageSize);
+    const totalPages = Math.ceil(config.values.length / config.pageSize);
     if (offsetPage > totalPages) {
         // reset offset page to final page if it's greater than the total number of pages
         offsetPage = totalPages - 1;

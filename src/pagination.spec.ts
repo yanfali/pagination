@@ -1,6 +1,6 @@
 import { PaginationConfiguration, paginationControls } from "./pagination";
 
-describe("pagination", () => {
+describe("pagination with pageSize of 1", () => {
   it("returns empty array of values, and control with 1 item", () => {
     const conf: PaginationConfiguration<number> = {
       maxValues: 3,
@@ -114,5 +114,50 @@ describe("pagination", () => {
         expect(result3.list[0]).toBe(1);
       }
     }
+  });
+});
+
+describe("pagination with pageSize of 2", () => {
+  it("max values 3, bigger array, page offset 0", () => {
+    const conf: PaginationConfiguration<number> = {
+      maxValues: 3,
+      values: [1, 2, 3, 4, 5, 6, 7],
+      pageSize: 2,
+    };
+    const result = paginationControls(conf, 0);
+    expect(result.list).toHaveLength(2);
+    expect(result.pagination).toHaveLength(4);
+    expect(result.pagination[0].offsetPage).toBe(undefined);
+    expect(result.pagination[3].offsetPage).toBe(1);
+  });
+  it("page offset 1", () => {
+    const conf: PaginationConfiguration<number> = {
+      maxValues: 3,
+      values: [1, 2, 3, 4, 5, 6, 7],
+      pageSize: 2,
+    };
+    const result = paginationControls(conf, 1);
+    expect(result.list).toHaveLength(2);
+    expect(result.list[0]).toBe(3);
+    // expect prev, 1, 2, 3, next
+    expect(result.pagination).toHaveLength(5);
+    expect(result.pagination[0].offsetPage).toBe(0); // previous
+    expect(result.pagination[2].offsetPage).toBe(undefined); // current page so no offset
+    expect(result.pagination[4].offsetPage).toBe(2); // next
+  });
+  it("page offset 2", () => {
+    const conf: PaginationConfiguration<number> = {
+      maxValues: 3,
+      values: [1, 2, 3, 4, 5, 6, 7],
+      pageSize: 2,
+    };
+    const result = paginationControls(conf, 2);
+    expect(result.list).toHaveLength(2);
+    expect(result.list[0]).toBe(5);
+    // expect prev, 1, 2, 3, next
+    expect(result.pagination).toHaveLength(6);
+    expect(result.pagination[0].offsetPage).toBe(1); // previous
+    expect(result.pagination[2].offsetPage).toBe(undefined); // current page so no offset
+    expect(result.pagination[4].offsetPage).toBe(3); // next
   });
 });
