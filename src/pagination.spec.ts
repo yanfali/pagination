@@ -52,4 +52,32 @@ describe("pagination", () => {
     expect(result.pagination).toHaveLength(4)
     expect(result.pagination[3].label).toBe('Next');
   })
+  it("returns 4 pagination elements for 4 values, last one being next", () => {
+    const conf: PaginationConfiguration<number> = {
+      maxValues: 3,
+      values: [ 1, 2, 3, 4 ],
+      pageSize: 1,
+    };
+
+    const result = paginationControls(conf, 0);
+    expect(result.list).toHaveLength(1)
+    expect(result.pagination).toHaveLength(4)
+    expect(result.pagination[3].label).toBe('Next');
+  })
+  it("page offset is now 1", () => {
+    const conf: PaginationConfiguration<number> = {
+      maxValues: 3,
+      values: [ 1, 2, 3, 4 ],
+      pageSize: 1,
+    };
+
+    const result = paginationControls(conf, 1);
+    expect(result.list).toHaveLength(1)
+    expect(result.list[0]).toBe(2)
+    expect(result.pagination).toHaveLength(5)
+    expect(result.pagination[0].label).toBe('Previous');
+    expect(result.pagination[0].offsetPage).toBe(0);
+    expect(result.pagination[4].label).toBe('Next');
+    expect(result.pagination[4].offsetPage).toBe(2);
+  })
 });

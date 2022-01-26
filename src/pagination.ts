@@ -6,8 +6,7 @@ export interface PaginationConfiguration<T> {
 
 export interface PaginationItem {
   label: string;
-  // number indicates page to jump to, undefined means this page is
-  // current viewed results
+  // number indicates page to jump to, undefined means this page is current viewed results
   offsetPage: number | undefined;
 }
 
@@ -29,13 +28,31 @@ export function paginationControls(
     result.pagination.push({ label: "1", offsetPage: undefined });
   } else {
     const totalPages = Math.floor(config.values.length / config.pageSize);
-    const offsetPage = 0;
-    for (let i = offsetPage; i < totalPages && i < config.maxValues; i++) {
+    if (offsetPage > totalPages) {
+        // reset offset page to final page if it's greater than the total number of pages
+        offsetPage = totalPages - 1;
+    }
+    let firstPage = offsetPage - config.maxValues;
+    if (firstPage < 0) {
+        firstPage = 0;
+    }
+
+    if (offsetPage > 0) {
+      result.pagination.push({
+        label: `Previous`,
+        offsetPage: offsetPage - 1
+      });
+    }
+
+    // const firstVisiblePagination 
+    // so calculate how many visible pages there should be based on the offset
+    for (let i = firstPage; i < totalPages && i < config.maxValues; i++) {
       result.pagination.push({
         label: `${i + 1}`,
         offsetPage: i === offsetPage ? undefined : i,
       });
     }
+
     if (result.pagination.length > 1) {
       result.pagination.push({
         label: "Next",
