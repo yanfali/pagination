@@ -41,26 +41,29 @@ Make it work like google search:
 
  Quite elegant.
 
+### Data Structures
+```
  Pagination data structure: {
-     visibleItems: [
+     pagination: [
          {
-             offsetPage: number | null,
+             label: string,
+             offsetPage: number | undefined,
          }
      ]
-     previous: number | null
-     next: number | null
  }
 
 configuration: {
-    pageSize = 1,
-    maxValues = 3,
-    values = [],
+    pageSize: 1,
+    maxValues: 3,
+    values: [],
 }
+```
 
-function paginationControls(configuration) {
+Previous and Next are just entries in the pagination with special labels. We can use the labels to extract them from the visible set and treat them specially in the UI.
 
-}
 
+### Function signature
+function paginationControls(configuration, offsetPage: number): PaginationResult
 
 
  Test Cases:
