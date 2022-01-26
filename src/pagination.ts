@@ -32,7 +32,7 @@ export function paginationControls(
         // reset offset page to final page if it's greater than the total number of pages
         offsetPage = totalPages - 1;
     }
-    let firstPage = offsetPage - config.maxValues;
+    let firstPage = offsetPage - Math.floor(config.maxValues / 2);
     if (firstPage < 0) {
         firstPage = 0;
     }
@@ -43,10 +43,10 @@ export function paginationControls(
         offsetPage: offsetPage - 1
       });
     }
-
+    console.log('totalpages', totalPages);
     // const firstVisiblePagination 
     // so calculate how many visible pages there should be based on the offset
-    for (let i = firstPage; i < totalPages && i < config.maxValues; i++) {
+    for (let i = firstPage; i < totalPages && (config.maxValues - (i - firstPage) > 0); i++) {
       result.pagination.push({
         label: `${i + 1}`,
         offsetPage: i === offsetPage ? undefined : i,

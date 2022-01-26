@@ -44,12 +44,24 @@ Make it work like google search:
  Pagination data structure: {
      visibleItems: [
          {
-             offsetPage: number,
+             offsetPage: number | null,
          }
      ]
      previous: number | null
      next: number | null
  }
+
+configuration: {
+    pageSize = 1,
+    maxValues = 3,
+    values = [],
+}
+
+function paginationControls(configuration) {
+
+}
+
+
 
  Test Cases:
 
@@ -75,7 +87,7 @@ list: [ 1 ]
 
 5. page size = 1, max values = 3, array [ 1, 2, 3, 4 ], offsetPage = 1
 
-pagination: Previous <2> 3 4 Next
+pagination: Previous 1 <2> 3 Next
 list: [ 2 ]
 
 5. page size = 1, max values = 3, array [ 1, 2, 3, 4 ], offsetPage = 2
