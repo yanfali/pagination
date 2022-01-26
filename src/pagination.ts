@@ -6,7 +6,9 @@ export interface PaginationConfiguration<T> {
 
 export interface PaginationItem {
   label: string;
-  offsetPage: number | undefined
+  // number indicates page to jump to, undefined means this page is
+  // current viewed results
+  offsetPage: number | undefined;
 }
 
 export interface PaginationResult {

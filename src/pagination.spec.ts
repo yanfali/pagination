@@ -13,7 +13,9 @@ describe("pagination", () => {
 
     const result = paginationControls(conf, 0);
     expect(result.list).toHaveLength(0);
+    // expect no results for an empty list
     expect(result.pagination).toHaveLength(1);
+    // still expect there to be a pagination with a current page
     expect(result.pagination[0].offsetPage).toBe(undefined);
   });
   it("returns empty array of values, and control with 1 item", () => {
@@ -41,9 +43,13 @@ describe("pagination", () => {
   it("returns 4 pagination elements", () => {
     const conf: PaginationConfiguration<number> = {
       maxValues: 3,
-      values: [ 1, 2 ],
+      values: [ 1, 2, 3 ],
       pageSize: 1,
     };
 
+    const result = paginationControls(conf, 0);
+    expect(result.list).toHaveLength(1)
+    expect(result.pagination).toHaveLength(4)
+    expect(result.pagination[3].label).toBe('Next');
   })
 });
