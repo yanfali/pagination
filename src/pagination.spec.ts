@@ -145,7 +145,7 @@ describe("pagination with pageSize of 2", () => {
     expect(result.pagination[2].offsetPage).toBe(undefined); // current page so no offset
     expect(result.pagination[4].offsetPage).toBe(2); // next
   });
-  it("page offset 2", () => {
+  it("page offset 2, check boundary of odd sized array creating enough pagination entries", () => {
     const conf: PaginationConfiguration<number> = {
       maxValues: 3,
       values: [1, 2, 3, 4, 5, 6, 7],
